@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Little Story 🫀</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #090909;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           PAGE SYSTEM
+        ========================= */
+
+        .page {
+            min-height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page.active {
+            display: flex;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================
+           BACKGROUND EFFECT
+        ========================= */
+
+        .page::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 600px;
+            height: 600px;
+
+            background: #4a0010;
+
+            filter: blur(150px);
+
+            opacity: 0.35;
+
+            border-radius: 50%;
+
+            top: -200px;
+            left: -200px;
+
+        }
+
+
+        .page::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            background: #26000a;
+
+            filter: blur(150px);
+
+            opacity: 0.4;
+
+            border-radius: 50%;
+
+            bottom: -200px;
+            right: -150px;
+
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content-box {
+
+            width: min(1000px, 95%);
+
+            text-align: center;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        h1 {
+
+            font-size: clamp(35px, 6vw, 65px);
+
+            margin-bottom: 20px;
+
+        }
+
+
+        h2 {
+
+            font-size: 23px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        p {
+
+            line-height: 1.8;
+
+        }
+
+
+        .subtitle {
+
+            font-size: 18px;
+
+            opacity: 0.8;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        button {
+
+            border: none;
+
+            padding: 14px 28px;
+
+            border-radius: 30px;
+
+            background: white;
+
+            color: #170006;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+
+            margin-top: 25px;
+
+        }
+
+
+        button:hover {
+
+            transform: scale(1.07);
+
+            box-shadow: 0 0 25px rgba(255,255,255,0.3);
+
+        }
+
+
+        /* =========================
+           OPENING PAGE
+        ========================= */
+
+        .opening-heart {
+
+            font-size: 110px;
+
+            animation: heartbeat 1.5s infinite;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        @keyframes heartbeat {
+
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            25% {
+                transform: scale(1.12);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+
+            60% {
+                transform: scale(1.15);
+            }
+
+        }
+
+
+        .small-text {
+
+            opacity: 0.65;
+
+            font-size: 14px;
+
+            margin-top: 15px;
+
+        }
+
+
+        /* =========================
+           STORY
+        ========================= */
+
+        .story-container {
+
+            max-height: 70vh;
+
+            overflow-y: auto;
+
+            padding: 10px;
+
+            scrollbar-width: thin;
+
+        }
+
+
+        .story-card {
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 22px;
+
+            padding: 28px;
+
+            margin-bottom: 22px;
+
+            text-align: left;
+
+            transition: 0.4s ease;
+
+        }
+
+
+        .story-card:hover {
+
+            transform: translateY(-5px);
+
+            background: rgba(255,255,255,0.11);
+
+        }
+
+
+        .chapter {
+
+            color: #ffb3c1;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .story-card h2 {
+
+            color: white;
+
+        }
+
+
+        .date {
+
+            color: #ff9eb1;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .story-card p {
+
+            margin-bottom: 12px;
+
+        }
+
+
+        /* =========================
+           LOVE CARDS
+        ========================= */
+
+        .love-cards {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+
+            margin-top: 30px;
+
+        }
+
+
+        .love-card {
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: 0.4s ease;
+
+        }
+
+
+        .love-card:hover {
+
+            transform: translateY(-8px) scale(1.02);
+
+            background: rgba(255,255,255,0.13);
+
+        }
+
+
+        .love-card span {
+
+            font-size: 42px;
+
+            display: block;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .love-card h2 {
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .love-card p {
+
+            opacity: 0.85;
+
+            line-height: 1.7;
+
+        }
+
+
+        .ending-line {
+
+            margin: 35px 0;
+
+            font-size: 18px;
+
+            line-height: 1.9;
+
+            font-style: italic;
+
+            color: #ffd6dd;
+
+        }
+
+
+        /* =========================
+           LETTER
+        ========================= */
+
+        .letter-box {
+
+            max-width: 750px;
+
+            margin: auto;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            border-radius: 25px;
+
+            padding: 40px;
+
+            line-height: 2;
+
+            font-size: 18px;
+
+        }
+
+
+        /* =========================
+           FLOATING HEARTS
+        ========================= */
+
+        .floating-heart {
+
+            position: fixed;
+
+            bottom: -30px;
+
+            font-size: 20px;
+
+            pointer-events: none;
+
+            animation: floatUp linear forwards;
+
+            z-index: 10;
+
+        }
+
+
+        @keyframes floatUp {
+
+            from {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+                opacity: 1;
+
+            }
+
+            to {
+
+                transform:
+                    translateY(-110vh)
+                    rotate(360deg);
+
+                opacity: 0;
+
+            }
+
+        }
+
+        /* =====================================================
+   FINAL PAGE
+===================================================== */
+#final {
+    min-height: 100vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.final-content {
+    max-width: 750px;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.final-heart {
+    font-size: 90px;
+    margin-bottom: 25px;
+    animation: heartbeat 1.5s infinite;
+}
+
+.final-content h1 {
+    font-size: 52px;
+    margin-bottom: 25px;
+}
+
+.final-question {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.final-love {
+    font-size: 30px;
+    line-height: 1.7;
+    margin: 45px 0;
+}
+
+
+/* =====================================================
+   LAST SURPRISE
+===================================================== */
+
+.surprise-message {
+    display: none;
+    max-width: 750px;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    animation: surpriseAppear 2s ease forwards;
+}
+
+.surprise-heart {
+    font-size: 90px;
+    margin-bottom: 25px;
+    animation: heartbeat 1.5s infinite;
+}
+
+.surprise-message h2 {
+    font-size: 38px;
+    margin-bottom: 40px;
+}
+
+.surprise-message p {
+    font-size: 20px;
+    line-height: 1.8;
+    margin: 25px 0;
+}
+
+.surprise-message strong {
+    font-size: 23px;
+}
+
+.surprise-message h1 {
+    font-size: 65px;
+    margin: 40px 0;
+}
+
+.final-line {
+    margin-top: 50px !important;
+}
+
+.forever-line {
+    font-size: 21px !important;
+    line-height: 2 !important;
+}
+
+.signature {
+    margin-top: 45px !important;
+    font-style: italic;
+    font-size: 22px !important;
+}
+
+
+/* =====================================================
+   SURPRISE ANIMATION
+===================================================== */
+
+@keyframes surpriseAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .final-content h1 {
+        font-size: 38px;
+    }
+
+    .final-question {
+        font-size: 28px;
+    }
+
+    .final-love {
+        font-size: 22px;
+    }
+
+    .surprise-message h2 {
+        font-size: 28px;
+    }
+
+    .surprise-message p {
+        font-size: 17px;
+    }
+
+    .surprise-message h1 {
+        font-size: 48px;
+    }
+
+}
+/* =====================================================
+   LAST SURPRISE MESSAGE
+===================================================== */
+
+.surprise-message {
+    display: none;
+    max-width: 650px;
+    margin: 50px auto 20px;
+    padding: 35px 25px;
+    text-align: center;
+    animation: surpriseAppear 2s ease forwards;
+}
+
+.surprise-heart {
+    font-size: 70px;
+    margin-bottom: 20px;
+    animation: heartbeat 1.5s infinite;
+}
+
+.surprise-message h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.surprise-message p {
+    font-size: 17px;
+    line-height: 1.8;
+    margin: 20px 0;
+}
+
+.surprise-message strong {
+    font-size: 20px;
+}
+
+.surprise-message h1 {
+    font-size: 50px;
+    margin: 30px 0;
+}
+
+.final-line {
+    margin-top: 35px !important;
+    opacity: 0.8;
+}
+
+.forever-line {
+    font-size: 18px !important;
+    line-height: 2 !important;
+}
+
+.signature {
+    margin-top: 35px !important;
+    font-style: italic;
+    font-size: 19px !important;
+}
+
+@keyframes surpriseAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+/* =====================================================
+   CINEMATIC SURPRISE REVEAL
+===================================================== */
+
+#secretOverlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#secretOverlay.show {
+    display: flex;
+    animation: blackFade 1.2s ease forwards;
+}
+
+.wait-text {
+    font-size: 18px;
+    letter-spacing: 3px;
+    opacity: 0;
+    animation: waitFade 2s ease forwards;
+}
+
+@keyframes blackFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes waitFade {
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+#easterEgg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.97);
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+}
+
+#easterEgg.show {
+    display: flex;
+}
+
+.easter-content {
+    max-width: 500px;
+}
+
+.egg-heart {
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
+.easter-content h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.easter-content p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+/* SECRET LOVE BUTTON */
+
+#loveSecret {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 999999;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+}
+
+#loveSecret.show {
+    display: flex;
+    animation: loveSecretFade 1s ease;
+}
+
+.love-secret-content {
+    max-width: 600px;
+}
+
+.love-secret-content .secret-heart {
+    font-size: 80px;
+    animation: heartbeat 1.5s infinite;
+    margin-bottom: 25px;
+}
+
+.love-secret-content h2 {
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.love-secret-content p {
+    font-size: 20px;
+    line-height: 1.8;
+    margin: 15px 0;
+}
+
+@keyframes loveSecretFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PAGE 1 — OPENING
+===================================================== -->
+
+<section class="page active" id="home">
+
+    <div class="content-box">
+
+        <div class="opening-heart" onclick="secretHeartClick()">
+            🫀
+        </div>
+
+        <h1>
+            Lavanya Mavaney...
+        </h1>
+
+        <p class="subtitle">
+            There is a little story I want you to read...
+        </p>
+
+        <button onclick="nextPage('home','story')">
+            Open Our Story 🧿
+        </button>
+
+        <p class="small-text">
+            Made with a little piece of my heart.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 2 — OUR LITTLE STORY
+===================================================== -->
+
+<section class="page" id="story">
+
+    <div class="content-box">
+
+        <h1>
+            Our Little Story🦢🌻
+        </h1>
+
+        <p class="subtitle">
+            From two kids who barely spoke... to us.
+        </p>
+
+
+        <div class="story-container">
+
+
+            <!-- =========================
+                 CHAPTER 01
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 01
+                </div>
+
+                <h2>
+                    Before We Became “Us”
+                </h2>
+
+                <p>
+                    From nursery to 10th standard,
+                    we were in the same school.
+                    Funny thing is... we barely even spoke.
+                </p>
+
+                <p>
+                    You were too shy, and somehow two people
+                    who would later become so close
+                    were once almost strangers.
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CHAPTER 02
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 02
+                </div>
+
+                <div class="date">
+                    26.03.2022
+                </div>
+
+                <h2>
+                    The Day You Finally Spoke
+                </h2>
+
+                <p>
+                    Then came our last day of school.
+                    Somehow, you finally came and spoke to me.
+                </p>
+
+                <p>
+                    And you even said sorry for all those years
+                    we hadn't talked.
+                </p>
+
+                <p>
+                    That little conversation was actually
+                    the beginning of something neither of us
+                    knew was coming.
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CHAPTER 03
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 03
+                </div>
+
+                <h2>
+                    “Happy Birthday Brooo”
+                </h2>
+
+                <p>
+                    On June 24, I wished you,
+                    <b>“Happy birthday brooo.”</b>
+                </p>
+
+                <p>
+                    The next day, you wished me for my birthday.
+                </p>
+
+                <p>
+                    It was such a tiny thing...
+                    but slowly, those tiny things
+                    became something much bigger.
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CHAPTER 04
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 04
+                </div>
+
+                <h2>
+                    From Reels To “GM Maameyy”
+                </h2>
+
+                <p>
+                    First it was sharing reels.
+                    Then little conversations.
+                </p>
+
+                <p>
+                    Then came our
+                    <b>“GM maameyy”</b>
+                    and
+                    <b>“GN maameyy.”</b>
+                </p>
+
+                <p>
+                    Slowly, talking to each other
+                    became part of our everyday routine.
+                </p>
+
+                <p>
+                    And somewhere between the random reels,
+                    silly conversations, family problems,
+                    happiness and everything in between...
+                </p>
+
+                <p>
+                    <b>
+                        We got attached.
+                    </b>
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CHAPTER 05
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 05
+                </div>
+
+                <h2>
+                    You Became My Person
+                </h2>
+
+                <p>
+                    i was your only female best friend,
+                    and I became someone you always prioritised.
+                </p>
+
+                <p>
+                    Whether you were with your family,
+                    friends, or celebrating something,
+                    you'd still find a way to text me.
+                </p>
+
+                <p>
+                    Even when you lost your phone,
+                    you somehow found a way to reach me.
+                </p>
+
+                <p>
+                    You were there through my ups and downs
+                    like a healer.
+                </p>
+
+                <p>
+                    And without either of us noticing...
+                </p>
+
+                <p>
+                    <b>
+                        We became each other's safe place.
+                    </b>
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CHAPTER 08
+                 MOVED HERE
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 06
+                </div>
+
+                <h2>
+                    The Way You Love Me
+                </h2>
+
+                <p>
+                    You run to me with every good news
+                    and every bad news.
+                </p>
+
+                <p>
+                    You make me feel like I'm your first priority.
+                </p>
+
+                <p>
+                    You take care of me like I'm your baby.
+                </p>
+
+                <p>
+                    And then there's the way you call me
+                    <b>“MAA.”</b>
+                </p>
+
+                <p>
+                    It's just one word.
+                    But when it comes from you,
+                    it feels completely different.
+                </p>
+
+                <p>
+                    And when you sleep on my lap
+                    like a <b>chamathuu kolandha</b>...
+                </p>
+
+                <p>
+                    for that moment,
+                    you're not the one taking care of me.
+                    You're just my little baby
+                    who feels safe with me.
+                </p>
+
+                <p>
+                    You're my Dodoo Maa.
+                    My healer.
+                    My comfort.
+                    My happiness.
+                    My place.
+                </p>
+
+                <p>
+                    <b>
+                        My everything.
+                    </b>
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CHAPTER 09
+                 MOVED HERE
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 07
+                </div>
+
+                <h2>
+                    Even When I Hurt You
+                </h2>
+
+                <p>
+                    I know I've hurt you too.
+                </p>
+
+                <p>
+                    Sometimes, I've hurt you deeply.
+                </p>
+
+                <p>
+                    And there were moments when I wondered...
+                </p>
+
+                <p>
+                    <b>
+                        “If it was someone else,
+                        would they have stayed?”
+                    </b>
+                </p>
+
+                <p>
+                    Maybe someone else would've left.
+                </p>
+
+                <p>
+                    But you still chose me.
+                </p>
+
+                <p>
+                    Even when I wasn't easy to understand.
+                    Even when loving me wasn't easy.
+                    Even when you had reasons to walk away...
+                </p>
+
+                <p>
+                    <b>
+                        You still chose us.
+                    </b>
+                </p>
+
+                <p>
+                    And I want you to know that I see it.
+                </p>
+
+                <p>
+                    I see your patience.
+                    I see your love.
+                    I see every time you came back.
+                </p>
+
+                <p>
+                    I'm sorry for every time
+                    I made your heart heavy.
+                </p>
+
+                <p>
+                    I may not be perfect...
+                    but I'll keep learning
+                    how to love you better.
+                </p>
+
+                <p>
+                    Because after everything...
+                </p>
+
+                <p>
+                    <b>
+                        I still choose you. 🫀
+                    </b>
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CHAPTER 06
+                 MOVED HERE
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 08
+                </div>
+
+                <h2>
+                    When Caring Became Something More
+                </h2>
+
+                <p>
+                    Of course, we fought too.
+                    A lot of it came from possessiveness.
+                </p>
+
+                <p>
+                    But one day, something inside me sparked.
+                </p>
+
+                <p>
+                    <b>
+                        “Ivana vida enna yaaru
+                        ivlo nalla paathuka mudiyum?”
+                    </b>
+                </p>
+
+                <p>
+                    And then came another thought...
+                </p>
+
+                <p>
+                    <b>
+                        “Ivan tha namba forever nuu.”
+                    </b>
+                </p>
+
+                <p>
+                    We already knew we couldn't live
+                    without each other.
+                </p>
+
+                <p>
+                    Even one day without talking
+                    would make us miss each other
+                    and feel upset.
+                </p>
+
+                <p>
+                    Maybe our hearts knew
+                    before we did.
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CHAPTER 07
+                 MOVED HERE
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 09
+                </div>
+
+                <div class="date">
+                    29.07.2026 — 1:30 AM
+                </div>
+
+                <h2>
+                    The Night Everything Changed
+                </h2>
+
+                <p>
+                    I finally said it.
+                </p>
+
+                <p>
+                    <b>
+                        “Love you dodoo maa.”
+                    </b>
+                </p>
+
+                <p>
+                    And you were shocked. 😭
+                </p>
+
+                <p>
+                    You kept asking if it was a trap
+                    or a prank.
+                </p>
+
+                <p>
+                    You just couldn't believe it.
+                </p>
+
+                <p>
+                    But then...
+                </p>
+
+                <p>
+                    you told me you loved me too.
+                </p>
+
+                <p>
+                    And just like that,
+                    years of friendship quietly became
+                    <b>us.</b>
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CHAPTER 10
+                 LAST
+            ========================== -->
+
+            <div class="story-card">
+
+                <div class="chapter">
+                    Chapter 10 — Our Little Secret
+                </div>
+
+                <div class="date">
+                    07.08.2026
+                </div>
+
+                <h2>
+                    The Little Black Thread 🖤
+                </h2>
+
+                <p>
+                    No crowd.
+                    No big celebration.
+                    No one else needed to know.
+                </p>
+
+                <p>
+                    Just you, me,
+                    and one little black thread.
+                </p>
+
+                <p>
+                    When you tied that thread around my neck,
+                    it didn't feel like just a thread to me.
+                </p>
+
+                <p>
+                    It felt like a tiny promise.
+                </p>
+
+                <p>
+                    A promise that somehow carried
+                    all those years with it —
+                    from two shy kids who barely spoke in school,
+                    to two people who couldn't stay a day
+                    without talking,
+                    to best friends,
+                    and finally...
+                    <b>to us.</b>
+                </p>
+
+                <p>
+                    Maybe it was a small moment for the world.
+                </p>
+
+                <p>
+                    But for me,
+                    it became one of our biggest memories.
+                </p>
+
+                <p>
+                    And that's why I'll always remember
+                    <b>07.08.2026.</b>
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <button onclick="nextPage('story','things')">
+            There's More... 🫀
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 3 — THINGS I NEVER WANT YOU TO FORGET
+===================================================== -->
+
+<section class="page" id="things">
+
+    <div class="content-box">
+
+        <h1>
+            Things I Never Want You To Forget 🫀
+        </h1>
+
+        <p class="subtitle">
+            Little things that mean everything to me...
+        </p>
+
+
+        <div class="love-cards">
+
+
+            <div class="love-card">
+
+                <span>🫀</span>
+
+                <h2>
+                    You Are My Safe Place
+                </h2>
+
+                <p>
+                    No matter how bad my day is,
+                    talking to you makes something
+                    inside me feel lighter.
+                </p>
+
+            </div>
+
+
+
+            <div class="love-card">
+
+                <span>🌙</span>
+
+                <h2>
+                    I Love Your “MAA”
+                </h2>
+
+                <p>
+                    You can call me by a hundred names,
+                    but somehow “MAA” from you
+                    will always feel different.
+                </p>
+
+            </div>
+
+
+
+            <div class="love-card">
+
+                <span>🥹</span>
+
+                <h2>
+                    My Little Baby
+                </h2>
+
+                <p>
+                    The way you sleep on my lap
+                    like a little child is one of those
+                    moments I want to keep forever.
+                </p>
+
+            </div>
+
+
+
+            <div class="love-card">
+
+                <span>🫶🏻</span>
+
+                <h2>
+                    You Always Come To Me
+                </h2>
+
+                <p>
+                    Good news, bad news, happiness
+                    or problems...
+                    somehow I'm always one of the first
+                    people you come to.
+                </p>
+
+            </div>
+
+
+
+            <div class="love-card">
+
+                <span>🩹</span>
+
+                <h2>
+                    My Healer
+                </h2>
+
+                <p>
+                    You've seen the difficult sides of me
+                    and still stayed beside me.
+                </p>
+
+            </div>
+
+
+
+            <div class="love-card">
+
+                <span>🔥</span>
+
+                <h2>
+                    My Biggest Motivator
+                </h2>
+
+                <p>
+                    When I doubt myself,
+                    you remind me that I can do better
+                    and keep going.
+                </p>
+
+            </div>
+
+
+
+            <div class="love-card">
+
+                <span>🏠</span>
+
+                <h2>
+                    You Feel Like Home
+                </h2>
+
+                <p>
+                    Maybe home isn't always a place.
+                    Sometimes it's simply the person
+                    you can be completely yourself with.
+                </p>
+
+            </div>
+
+
+
+            <div class="love-card">
+
+                <span>♾️</span>
+
+                <h2>
+                    My Favourite Person
+                </h2>
+
+                <p>
+                    Somehow you became the person
+                    I never want to imagine
+                    my life without.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <p class="ending-line">
+
+            “These aren't the only reasons I love you...<br>
+
+            They're just the ones I could put into words.” 🫀
+
+        </p>
+
+
+        <button onclick="nextPage('things','letter')">
+
+            One More Thing... 💌
+
+        </button>
+
+    </div>
+
+</section>
+<!-- =====================================================
+     PAGE 4 — LOVE LETTER
+===================================================== -->
+
+<section class="page" id="letter">
+
+    <div class="content-box">
+
+        <h1>
+            A Letter For You 💌
+        </h1>
+
+        <p class="subtitle">
+            From my heart to my Bhaaduu 🫀
+        </p>
+
+        <div class="letter-box">
+
+            <p>
+                <strong>My Dear Bhaaduu,</strong>
+            </p>
+
+            <br>
+
+            <p>
+                I don't just want to love you…
+            </p>
+
+            <p>
+                <strong>
+                    I want a future with you, a beautiful family!
+                </strong>
+            </p>
+
+            <p>
+                <strong>I want to know you. Truly.</strong>
+            </p>
+
+            <br>
+
+            <p>
+                I want to learn every little version of you —
+                your moods, your silence, your rude ass, your soft side,
+                the things you hide, and even the things you don't know
+                how to say.
+            </p>
+
+            <br>
+
+            <p>
+                I want to know what makes your heart happy,
+                what makes it heavy, and how I can make your bad days
+                a little softer.
+            </p>
+
+            <br>
+
+            <p>
+                I know I won't always get everything right.
+                But I'll keep learning you, understanding you,
+                and loving you a little better every day.
+            </p>
+
+            <br>
+
+            <p>
+                I want to be the girl you can come to with
+                <strong>everything</strong> —
+                your happiness, your anger, your fears,
+                your random thoughts, even your silence.
+            </p>
+
+            <br>
+
+            <p>
+                Not just your girlfriend…
+            </p>
+
+            <p>
+                <strong>
+                    I want to be yours.
+                    Your safe place.
+                    Your one woman.
+                </strong>
+            </p>
+
+            <br>
+
+            <p>
+                And whatever version of you I meet tomorrow,
+            </p>
+
+            <p>
+                <strong>
+                    I'll still want to know him,
+                    love him, and choose him.
+                </strong>
+            </p>
+
+            <br>
+
+            <p>
+                <strong>
+                    Always you, Dodo Maa. 🫀
+                </strong>
+            </p>
+
+            <p>
+                <strong>
+                    Always me, beside you. ♾️
+                </strong>
+            </p>
+
+            <br>
+
+            <p>
+                <strong>
+                    Hate you more minee!!!!! ❤️
+                </strong>
+            </p>
+
+        </div>
+
+
+        <button onclick="nextPage('letter','final')">
+            Continue 🫀
+        </button>
+
+    </div>
+
+</section>
+<!-- =====================================================
+     PAGE 5 — FINAL SURPRISE
+===================================================== -->
+
+<section class="page" id="final">
+
+    <!-- FIRST FINAL SCREEN -->
+    <div class="final-content" id="finalIntro">
+
+        <div class="final-heart">
+            🫀
+        </div>
+
+        <h1>
+            After everything...
+        </h1>
+
+        <p class="final-question">
+            I still choose you.
+        </p>
+
+        <p class="final-love">
+            And I hope you<br>
+            keep choosing me too.
+        </p>
+
+        <button onclick="showLastSurprise()">
+            One Last Thing 
+        </button>
+
+    </div>
+
+
+    <!-- LAST SURPRISE — HIDDEN INITIALLY -->
+
+    <div id="surpriseMessage" class="surprise-message">
+
+        <div class="surprise-heart">
+            🫀
+        </div>
+
+        <h2>
+            One last thing, maameyy...
+        </h2>
+
+        <p>
+            If I had to live our whole story again,
+            from nursery... through all the fights,
+            laughs, tears, friendship and love...
+        </p>
+
+        <p>
+            <strong>
+                I'd still find my way back to you.
+            </strong>
+        </p>
+
+        <p>
+            Because somewhere along the way,
+            you stopped being just someone I loved...
+        </p>
+
+        <p>
+            <strong>
+                Your minee.
+            </strong>
+        </p>
+
+        <p class="final-line">
+            So here's my forever answer...
+        </p>
+
+        <h1>
+            It's you. 🫀
+        </h1>
+
+        <p class="forever-line">
+            Today. Tomorrow. Every version of us.
+            <br>
+            I'll choose you.
+            <br><br>
+            <strong>Always.</strong> ♾️
+        </p>
+
+        <p class="signature">
+            — Your kuchii Pachoo🫀
+        </p>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+    /* =========================
+       PAGE NAVIGATION
+    ========================= */
+
+    function nextPage(currentPage, nextPage) {
+
+        const current =
+            document.getElementById(currentPage);
+
+        const next =
+            document.getElementById(nextPage);
+
+
+        current.classList.remove("active");
+
+
+        setTimeout(() => {
+
+            next.classList.add("active");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }, 100);
+
+    }
+
+
+
+    /* =========================
+       FLOATING HEARTS
+    ========================= */
+
+    function createFloatingHeart() {
+
+        const heart =
+            document.createElement("div");
+
+
+        heart.className =
+            "floating-heart";
+
+
+        const hearts = [
+            "🫀",
+            "❤️",
+            "🩷",
+            "🤍"
+        ];
+
+
+        heart.innerHTML =
+            hearts[
+                Math.floor(
+                    Math.random() * hearts.length
+                )
+            ];
+
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+
+        heart.style.fontSize =
+            (15 + Math.random() * 20) + "px";
+
+
+        heart.style.animationDuration =
+            (5 + Math.random() * 5) + "s";
+
+
+        document.body.appendChild(heart);
+
+
+        setTimeout(() => {
+
+            heart.remove();
+
+        }, 10000);
+
+    }
+
+
+    setInterval(
+        createFloatingHeart,
+        900
+    );
+
+
+
+    /* =========================
+       FINAL HEART EXPLOSION
+    ========================= */
+
+    function heartExplosion() {
+
+        for (let i = 0; i < 40; i++) {
+
+            const heart =
+                document.createElement("div");
+
+
+            heart.innerHTML = "💋";
+
+
+            heart.style.position =
+                "fixed";
+
+
+            heart.style.left =
+                "50%";
+
+
+            heart.style.top =
+                "50%";
+
+
+            heart.style.fontSize =
+                (15 + Math.random() * 30) + "px";
+
+
+            heart.style.zIndex =
+                "999";
+
+
+            heart.style.pointerEvents =
+                "none";
+
+
+            const x =
+                (Math.random() - 0.5) * 1000;
+
+
+            const y =
+                (Math.random() - 0.5) * 800;
+
+
+            heart.animate(
+
+                [
+                    {
+                        transform:
+                            "translate(-50%, -50%) scale(1)",
+
+                        opacity: 1
+                    },
+
+                    {
+                        transform:
+                            `translate(${x}px, ${y}px) scale(1.5)`,
+
+                        opacity: 0
+                    }
+                ],
+
+                {
+                    duration: 1800,
+
+                    easing: "ease-out"
+                }
+
+            );
+
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(() => {
+
+                heart.remove();
+
+            }, 1800);
+
+        }
+
+    }
+function showLastSurprise() {
+
+    // Start heart explosion
+    heartExplosion();
+
+    // Black cinematic screen
+    const overlay = document.getElementById("secretOverlay");
+
+    overlay.classList.add("show");
+
+    // Wait...
+    setTimeout(() => {
+
+        // Hide black screen
+        overlay.style.display = "none";
+
+        // Show the actual surprise
+        const surprise =
+            document.getElementById("surpriseMessage");
+
+        surprise.style.display = "block";
+
+        surprise.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }, 3000);
+
+}
+let secretHeartCount = 0;
+
+function secretHeartClick() {
+
+    secretHeartCount++;
+
+    if (secretHeartCount === 5) {
+
+        document.getElementById("easterEgg").classList.add("show");
+
+        secretHeartCount = 0;
+    }
+}
+
+function closeEasterEgg() {
+
+    document.getElementById("easterEgg").classList.remove("show");
+
+}
+function showSecretLove() {
+
+    const secret = document.getElementById("loveSecret");
+
+    secret.classList.add("show");
+
+    // Extra floating hearts
+    for (let i = 0; i < 25; i++) {
+        createFloatingHeart();
+    }
+}
+</script>
+
+<div id="secretOverlay">
+    <div class="wait-text">
+        wait... 🫀
+    </div>
+</div>
+<div id="easterEgg" onclick="closeEasterEgg()">
+    <div class="easter-content">
+
+        <div class="egg-heart">🫀</div>
+
+        <h2>You found something I hid for you... 🥹</h2>
+
+        <p>Just like I found you. 🫀</p>
+
+        <p><strong>Now come here, idiot. 🫂</strong></p>
+
+    </div>
+</div>
+<!-- SECRET LOVE BUTTON SURPRISE -->
+
+<div id="loveSecret">
+    <div class="love-secret-content">
+
+        <div class="secret-heart">
+            🫀
+        </div>
+
+        <h2>
+            I knew it. 😭🫀
+        </h2>
+
+        <p>
+            Now you're stuck with me forever. ♾️
+        </p>
+
+        <p>
+            No returns. No refunds.
+        </p>
+
+        <p>
+            Sorry Dodo. 😌🫂
+        </p>
+
+    </div>
+</div>
+</body>
+
+</html>
